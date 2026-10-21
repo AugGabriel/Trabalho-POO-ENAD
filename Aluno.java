@@ -1,5 +1,9 @@
 public class Aluno {
 
-    private int semIngresso;
+    private String nome, matricula;
+    private boolean questionarioRespondido;
+
+    public boolean regular() {}
     
+    public void cadastrarResposta() {}
 }
