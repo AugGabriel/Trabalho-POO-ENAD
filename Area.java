@@ -9,5 +9,7 @@ public class Area {
         return this.nome + " - " + this.codigo;
     }
 
-    public void adicionarCurso(Curso curso) {}
+    public void adicionarCurso(Curso curso) {
+        this.cursos.add(curso);
+    }
 }
