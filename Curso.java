@@ -5,6 +5,10 @@ public class Curso {
     private String codigo, nome;
     private ArrayList<Aluno> alunos = new ArrayList<>();
 
+    public String toString() {
+        return this.nome + " - " + this.codigo;
+    }
+
     public void adicionarAluno(Aluno aluno) {}
 
     public double calcularMedia() {}
