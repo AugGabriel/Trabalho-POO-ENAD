@@ -9,13 +9,55 @@ public class Curso {
         return this.nome + " - " + this.codigo;
     }
 
-    public void adicionarAluno(Aluno aluno) {}
+    public void adicionarAluno(Aluno aluno) {
+        this.alunos.add(aluno);
+    }
 
-    public double calcularMedia() {}
+    public double calcularMedia() {
+        int soma = 0, quantidade = 0;
 
-    public int calcularConceito() {}
+        for (Aluno aluno : this.alunos) {
+            if (aluno instanceof Concluinte) {
+                soma += ((Concluinte)aluno).calcularNota();
+                quantidade += 1;
+            }
+        }
 
-    public ArrayList<Ingressante> ingressantes() {}
+        return (quantidade > 0) ? (soma / quantidade) : 0;
+    }
 
-    public ArrayList<Ingressante> ingressantes(int semestre) {}
+    public int calcularConceito() {
+        double media = this.calcularMedia();
+
+        if (media < 2.0) { return 1; }
+        if (media < 4.0) { return 2; }
+        if (media < 6.0) { return 3; }
+        if (media < 8.0) { return 4; }
+        return 5;
+    }
+
+    public ArrayList<Ingressante> ingressantes() {
+        ArrayList<Ingressante> ingressantes = new ArrayList<>();
+        
+        for (Aluno aluno : this.alunos) {
+            if (aluno instanceof Ingressante) {
+                ingressantes.add((Ingressante)aluno);
+            }
+        }
+        
+        return ingressantes;
+    }
+    
+    public ArrayList<Ingressante> ingressantes(int semestre) {
+        ArrayList<Ingressante> ingressantes = this.ingressantes();
+        ArrayList<Ingressante> ingressantesSemestre = new ArrayList<>();
+
+        for (Ingressante ingressante : ingressantes) {
+            if (ingressante.getSemestreIngresso() == semestre) {
+                ingressantesSemestre.add(ingressante);
+            }
+        }
+
+        return ingressantesSemestre;
+    }
 }

@@ -7,6 +7,8 @@ public class Ingressante extends Aluno {
         this.semestreIngresso = semestreIngresso;
     }
 
+    public int getSemestreIngresso() { return this.semestreIngresso; }
+
     public String toString() {
         return this.stringParcial() + "INGRESSANTE";
     }
