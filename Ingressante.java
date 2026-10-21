@@ -1,3 +1,3 @@
-public class Ingressante {
+public class Ingressante extends Aluno {
     
 }
