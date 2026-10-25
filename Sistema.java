@@ -12,11 +12,27 @@ public class Sistema {
         this.alunos = new ArrayList<>();
     }
 
-    public void cadastrarArea(Area area) {}
+    public void cadastrarArea(Area area) { this.areas.add(area); }
 
-    public void cadastrarCurso(Curso curso, Area area) {}
+    public void listarAreas() {
+        for (Area area : this.areas) {
+            System.out.println(area.getCodigo() + " - " + area.getNome());
+        }
+    }
 
-    public void cadastrarAluno(Aluno aluno, Curso curso) {}
+    public Area getArea(String codigo) {
+        for (Area area : this.areas) {
+            if (area.getCodigo() == codigo) {
+                return area;
+            }
+        }
+        
+        return null;
+    }
+
+    public void cadastrarCurso(Curso curso, Area area) { this.cursos.add(curso); }
+
+    public void cadastrarAluno(Aluno aluno, Curso curso) { this.alunos.add(aluno); }
 
     public void listarResultados(int conceito) {}
 
