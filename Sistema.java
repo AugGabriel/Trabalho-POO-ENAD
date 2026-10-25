@@ -22,7 +22,7 @@ public class Sistema {
 
     public Area getArea(String codigo) {
         for (Area area : this.areas) {
-            if (area.getCodigo() == codigo) {
+            if (area.getCodigo().equals(codigo)) {
                 return area;
             }
         }
@@ -40,7 +40,7 @@ public class Sistema {
 
     public Curso getCurso(String codigo) {
         for (Curso curso : this.cursos) {
-            if (curso.getCodigo() == codigo) {
+            if (curso.getCodigo().equals(codigo)) {
                 return curso;
             }
         }
