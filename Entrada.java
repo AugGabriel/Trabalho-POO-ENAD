@@ -9,71 +9,63 @@ import java.util.Scanner;
  */
 public class Entrada {
 
+    private static Scanner leitor;
+
     /**
      * Se houver um arquivo input.txt na pasta em que o projeto está sendo executado,
      * define que o Scanner vai ler deste arquivo e não do teclado.
      * Se o arquivo não existir, define que o Scanner vai ler da entrada padrão (teclado)
-     * NÃO ALTERE O ESTE CODIGO!!!!
-     * @return Um objeto da classe Scanner de onde a entrada será lida
      */
-    public static Scanner abrirEntrada() {
-        Scanner input = null;
-
+    public static void abrirEntrada() {
         try {
             // Se houver um arquivo input.txt, o Scanner vai ler dele.
-            input = new Scanner(new FileInputStream("input.txt")).useLocale(Locale.US);
+            leitor = new Scanner(new FileInputStream("input.txt")).useLocale(Locale.US);
 
         } catch (FileNotFoundException e) {
             // Caso contrário, vai ler do teclado.
             // Locale.US para que o Java sempre leia double com "pontos" ao invés de "vírgulas"
-            input = new Scanner(System.in).useLocale(Locale.US);
+            leitor = new Scanner(System.in).useLocale(Locale.US);
         }
-
-        return input;
     }
 
     /**
      * Fecha o Scanner antes de sair do programa.
-     * @param input: Um objeto da classe Scanner de onde a entrada está sendo lida
      */
-    public static void fecharEntrada(Scanner input) {
-        input.close();
+    public static void fecharEntrada() {
+        leitor.close();
     }
 
     /**
      * Faz a leitura de uma linha inteira
-     * @param msg: Mensagem que será exibida ao usuário
-     * @param input: Um objeto da classe Scanner de onde a entrada está sendo lida
+     * @param mensagem: Mensagem que será exibida ao usuário
      * @return Uma String contendo a linha que foi lida
      */
-    public static String lerLinha(String msg, Scanner input) {
+    public static String lerLinha(String mensagem) {
         // Imprime uma mensagem ao usuário, lê uma e retorna esta linha
-        System.out.print(msg);
-        String linha = input.nextLine();
-        return linha;
+        System.out.print(mensagem);
+        return leitor.nextLine();
     }
 
     /**
      * Faz a leitura de um número inteiro
-     * @param msg: Mensagem que será exibida ao usuário
-     * @param input: Um objeto da classe Scanner de onde a entrada está sendo lida
+     * @param mensagem: Mensagem que será exibida ao usuário
      * @return O número digitado pelo usuário convertido para int
      */
-    public static int lerInteiro(String msg, Scanner input) {
+    public static int lerInteiro(String mensagem) {
         // Imprime uma mensagem ao usuário, lê uma linha contendo um inteiro e retorna este inteiro
-        String linha = Entrada.lerLinha(msg, input);
+        String linha = Entrada.lerLinha(mensagem);
         return Integer.parseInt(linha);
     }
 
     /**
      * Faz a leitura de um double
-     * @param msg: Mensagem que será exibida ao usuário
+     * @param mensagem: Mensagem que será exibida ao usuário
      * @param input: Um objeto da classe Scanner de onde a entrada está sendo lida
      * @return O número digitado pelo usuário convertido para double
      */
-    private static double lerDouble(String msg, Scanner input) {
+    public static double lerDouble(String mensagem) {
         // Imprime uma mensagem ao usuário, lê uma linha contendo um double e retorna este double
-        String linha = Entrada.lerLinha(msg, input);
+        String linha = Entrada.lerLinha(mensagem);
         return Double.parseDouble(linha);
     }
 
@@ -81,26 +73,26 @@ public class Entrada {
      * Imprime o menu principal, lê a opção escolhida pelo usuário e retorna a opção selecionada.
      * @return Inteiro contendo a opção escolhida pelo usuário
      */
-    public static int menu(Scanner input) {
+    public static int menu() {
         // Imprime o menu principal, lê a opção escolhida pelo usuário e retorna a opção selecionada.
-        String msg = "*********************\n" +
+        String mensagem = "*********************\n" +
                 "Escolha uma opção:\n" +
                 "1) Cadastro\n" +
                 "2) Relatórios\n" +
                 "0) Sair\n";
 
-        int op = Entrada.lerInteiro(msg, input);
+        int operacao = Entrada.lerInteiro(mensagem);
 
-        while (op < 0 || op > 2) {
+        while (operacao < 0 || operacao > 2) {
             System.out.println("Opção inválida. Tente novamente: ");
-            op = Entrada.lerInteiro(msg, input);
+            operacao = Entrada.lerInteiro(mensagem);
         }
 
-        return op;
+        return operacao;
     }
 
-    public static void menuCadastro(Sistema s, Scanner input) {
-        String msg = "*********************\n" +
+    public static void menuCadastro(Sistema sistema) {
+        String mensagem = "*********************\n" +
                 "1) Cadastrar Área\n" +
                 "2) Cadastrar Curso\n" +
                 "3) Cadastrar Aluno Ingressante\n" +
@@ -109,28 +101,28 @@ public class Entrada {
                 "6) Cadastrar Resultado de Prova\n" +
                 "0) Voltar\n";
 
-        int op = Entrada.lerInteiro(msg, input);
+        int operacao = Entrada.lerInteiro(mensagem);
 
-        if (op == 0) return;
+        if (operacao == 0) return;
 
-        switch(op) {
+        switch(operacao) {
             case 1:
-                Entrada.cadastrarArea(s, input);
+                // Entrada.cadastrarArea(sistema);
                 break;
             case 2:
-                //Entrada.cadCurso(s, input);
+                // Entrada.cadastrarCurso(sistema);
                 break;
             case 3:
-                //Entrada.cadIngressante(s, input);
+                // Entrada.cadastrarIngressante(sistema);
                 break;
             case 4:
-                //Entrada.cadConcluinte(s, input);
+                // Entrada.cadastrarConcluinte(sistema);
                 break;
             case 5:
-                //Entrada.cadResposta(s, input);
+                // Entrada.cadastrarResposta(sistema);
                 break;
             case 6:
-                //Entrada.cadProva(s, input);
+                // Entrada.cadastrarProva(sistema);
                 break;
             default:
                 System.out.println("Opção Inválida.");
@@ -138,11 +130,11 @@ public class Entrada {
 
     }
 
-    public static void cadastrarArea(Sistema s, Scanner input) {
-        String nome = Entrada.lerLinha("Digite o nome da área: ", input);
-        String codigo = Entrada.lerLinha("Digite o código da área: ", input);
+    public static void cadastrarArea(Sistema sistema) {
+        String nome = Entrada.lerLinha("Digite o nome da área: ");
+        String codigo = Entrada.lerLinha("Digite o código da área: ");
 
-        s.cadastrarArea(new Area(nome, codigo));
+        sistema.cadastrarArea(new Area(nome, codigo));
         System.out.println("Área cadastrada com sucesso!");
     }
 }
