@@ -3,7 +3,13 @@ import java.util.ArrayList;
 public class Curso {
 
     private String codigo, nome;
-    private ArrayList<Aluno> alunos = new ArrayList<>();
+    private ArrayList<Aluno> alunos;
+
+    public Curso(String codigo, String nome) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.alunos = new ArrayList<>();
+    }
 
     public String toString() {
         return this.nome + " - " + this.codigo;
