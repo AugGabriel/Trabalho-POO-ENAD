@@ -32,6 +32,22 @@ public class Sistema {
 
     public void cadastrarCurso(Curso curso, Area area) { this.cursos.add(curso); }
 
+    public void listarCursos() {
+        for (Curso curso : this.cursos) {
+            System.out.println(curso.getCodigo() + " - " + curso.getNome());
+        }
+    }
+
+    public Curso getCurso(String codigo) {
+        for (Curso curso : this.cursos) {
+            if (curso.getCodigo() == codigo) {
+                return curso;
+            }
+        }
+        
+        return null;
+    }
+
     public void cadastrarAluno(Aluno aluno, Curso curso) { this.alunos.add(aluno); }
 
     public void listarResultados(int conceito) {}

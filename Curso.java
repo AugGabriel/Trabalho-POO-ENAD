@@ -11,6 +11,10 @@ public class Curso {
         this.alunos = new ArrayList<>();
     }
 
+    public String getCodigo() { return this.codigo; }
+
+    public String getNome() { return this.nome; }
+
     public String toString() {
         return this.nome + " - " + this.codigo;
     }
