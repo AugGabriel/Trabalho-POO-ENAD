@@ -107,10 +107,10 @@ public class Entrada {
 
         switch(operacao) {
             case 1:
-                // Entrada.cadastrarArea(sistema);
+                Entrada.cadastrarArea(sistema);
                 break;
             case 2:
-                // Entrada.cadastrarCurso(sistema);
+                Entrada.cadastrarCurso(sistema);
                 break;
             case 3:
                 // Entrada.cadastrarIngressante(sistema);
@@ -136,5 +136,23 @@ public class Entrada {
 
         sistema.cadastrarArea(new Area(nome, codigo));
         System.out.println("Área cadastrada com sucesso!");
+    }
+
+    public static void cadastrarCurso(Sistema sistema) {
+        String nome = Entrada.lerLinha("Digite o nome do curso: ");
+        String codigo = Entrada.lerLinha("Digite o código do curso: ");
+
+        System.out.println("Áreas cadastradas:");
+        sistema.listarAreas();
+        String codigoArea = Entrada.lerLinha("Digite o código da área do curso: ");
+        Area area = sistema.getArea(codigoArea);
+
+        if (area == null) {
+            System.out.println("Não foi possível encontrar a área.");
+            return;
+        }
+
+        sistema.cadastrarCurso(new Curso(codigo, nome), area);
+        System.out.println("Curso cadastrado com sucesso!");
     }
 }
