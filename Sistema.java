@@ -51,25 +51,18 @@ public class Sistema {
     public void cadastrarAluno(Aluno aluno, Curso curso) { this.alunos.add(aluno); }
     
     public void listarAlunosIrregulares() {
-        ArrayList<Aluno> irregulares = new ArrayList<>();
-
         // Alunos ingressantes
         for (Aluno aluno : this.alunos) {
             if (aluno instanceof Ingressante && !aluno.regular()) {
-                irregulares.add(aluno);
+                System.out.println(aluno.toString());
             }
         }
         
         // Alunos concluintes
         for (Aluno aluno : this.alunos) {
             if (aluno instanceof Concluinte && !aluno.regular()) {
-                irregulares.add(aluno);
+                System.out.println(aluno.toString());
             }
-        }
-        
-        // Saída de dados
-        for (Aluno aluno : irregulares) {
-            System.out.println(aluno.toString());
         }
     }
 
@@ -101,7 +94,20 @@ public class Sistema {
         return null;
     }
 
-    public void listarResultados(int conceito) {}
+    public void listarResultados(int conceito) {
+        boolean houveCorrespondencia = false;
+
+        for (Curso curso : this.cursos) {
+            if (curso.calcularConceito() == conceito) {
+                houveCorrespondencia = true;
+                System.out.println(curso.toString());
+            }
+        }
+
+        if (!houveCorrespondencia) {
+            System.out.println("Nenhum curso com conceito " + conceito + " foi encontrado.");
+        }
+    }
 
     public void listarResultados(String nomeArea) {}
 }
