@@ -15,6 +15,8 @@ public class Curso {
 
     public String getNome() { return this.nome; }
 
+    public ArrayList<Aluno> getAlunos() { return this.alunos; }
+
     public String toString() {
         return this.nome + " - " + this.codigo;
     }

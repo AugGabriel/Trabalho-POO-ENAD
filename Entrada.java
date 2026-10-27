@@ -172,6 +172,10 @@ public class Entrada {
                 break;
 
             case 3:
+                System.out.println("Alunos irregulares com o ENADE: ");
+                sistema.listarAlunosIrregulares();
+                
+                break;
 
             case 0:
                 break;

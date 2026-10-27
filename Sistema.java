@@ -51,17 +51,11 @@ public class Sistema {
     public void cadastrarAluno(Aluno aluno, Curso curso) { this.alunos.add(aluno); }
     
     public void listarAlunosIrregulares() {
-        // Alunos ingressantes
-        for (Aluno aluno : this.alunos) {
-            if (aluno instanceof Ingressante && !aluno.regular()) {
-                System.out.println(aluno.toString());
-            }
-        }
-        
-        // Alunos concluintes
-        for (Aluno aluno : this.alunos) {
-            if (aluno instanceof Concluinte && !aluno.regular()) {
-                System.out.println(aluno.toString());
+        for (Curso curso : this.cursos) {
+            for (Aluno aluno : curso.getAlunos()) {
+                if (!aluno.regular()) {
+                    System.out.println(aluno.toString() + " - " + curso.toString());
+                }
             }
         }
     }
