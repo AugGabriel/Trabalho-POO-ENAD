@@ -92,18 +92,16 @@ public class Entrada {
     }
 
     public static void menuCadastro(Sistema sistema) {
-        String mensagem = "*********************\n" +
-                "1) Cadastrar Área\n" +
-                "2) Cadastrar Curso\n" +
-                "3) Cadastrar Aluno Ingressante\n" +
-                "4) Cadastrar Aluno Concluinte\n" +
-                "5) Cadastrar Resposta de Questionário\n" +
-                "6) Cadastrar Resultado de Prova\n" +
-                "0) Voltar\n";
+        String mensagem = "" +
+            "1) Cadastrar Área\n" +
+            "2) Cadastrar Curso\n" +
+            "3) Cadastrar Aluno Ingressante\n" +
+            "4) Cadastrar Aluno Concluinte\n" +
+            "5) Cadastrar Resposta de Questionário\n" +
+            "6) Cadastrar Resultado de Prova\n" +
+            "0) Voltar\n";
 
         int operacao = Entrada.lerInteiro(mensagem);
-
-        if (operacao == 0) return;
 
         switch(operacao) {
             case 1:
@@ -127,10 +125,44 @@ public class Entrada {
             case 0:
                 break;
             default:
-                System.out.println("Opção Inválida.");
+                System.out.println("Opção inválida.");
                 break;
         }
+    }
 
+    public static void menuRelatorios(Sistema sistema) {
+        String mensagem = "" +
+            "1) Listar Resultados por Conceito\n" +
+            "2) Listar Resultados por Área\n" +
+            "3) Listar Alunos Irregulares\n" +
+            "0) Voltar\n";
+
+        int operacao = Entrada.lerInteiro(mensagem);
+
+        switch (operacao) {
+            case 1:
+                int conceito;
+                conceito = Entrada.lerInteiro("Digite o conceito desejado (1 a 5): ");
+
+                if (conceito < 1 || conceito > 5) {
+                    System.out.println("Valor inválido.");
+                    return;
+                }
+
+                System.out.println("Cursos com conceito " + conceito);
+                sistema.listarResultados(conceito);
+                break;
+
+            case 2:
+                sistema.listarResultados(area);
+                break;
+            case 3:
+            case 0:
+                break;
+            default:
+                System.out.println("Opção inválida.");
+                break;
+        }
     }
 
     public static void cadastrarArea(Sistema sistema) {
@@ -249,6 +281,6 @@ public class Entrada {
             "Digite o valor da nota de conhecimentos específicos:"
         );
         concluinte.cadastrarProva(notaFormacaoGeral, notaComponenteEspecifico);
-        System.out.println("Prova cadastrada com sucesso.");
+        System.out.println("Prova cadastrada com sucesso!");
     }
 }
