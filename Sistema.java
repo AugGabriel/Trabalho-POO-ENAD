@@ -47,12 +47,22 @@ public class Sistema {
         
         return null;
     }
-
+    
     public void cadastrarAluno(Aluno aluno, Curso curso) { this.alunos.add(aluno); }
+    
+    public void listarAlunosIrregulares() {}
+    
+    public Aluno getAluno(String matricula) {
+        for (Aluno aluno : this.alunos) {
+            if (aluno.getMatricula().equals(matricula)) {
+                return aluno;
+            }
+        }
+        
+        return null;
+    }
 
     public void listarResultados(int conceito) {}
 
     public void listarResultados(String nomeArea) {}
-
-    public void listarAlunosIrregulares() {}
 }

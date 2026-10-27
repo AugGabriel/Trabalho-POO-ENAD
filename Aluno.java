@@ -9,6 +9,8 @@ public class Aluno {
         this.questionarioRespondido = false;
     }
 
+    public String getMatricula() { return this.matricula; }
+
     protected String stringParcial() {
         return this.nome + " (" + this.matricula + ") - ";
     }
@@ -17,5 +19,7 @@ public class Aluno {
         return this.questionarioRespondido;
     }
     
-    public void cadastrarResposta() {}
+    public void cadastrarResposta() {
+        this.questionarioRespondido = true;
+    }
 }

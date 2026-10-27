@@ -119,7 +119,7 @@ public class Entrada {
                 Entrada.cadastrarConcluinte(sistema);
                 break;
             case 5:
-                // Entrada.cadastrarResposta(sistema);
+                Entrada.cadastrarResposta(sistema);
                 break;
             case 6:
                 // Entrada.cadastrarProva(sistema);
@@ -201,5 +201,27 @@ public class Entrada {
 
     public static void cadastrarConcluinte(Sistema sistema) {
         Entrada.cadastrarAluno(sistema, false);
+    }
+
+    public static void cadastrarResposta(Sistema sistema) {
+        System.out.println("Alunos cadastrados: ");
+        sistema.listarAlunosIrregulares();
+
+        String matricula = Entrada.lerLinha(
+            "Digite a matrícula do aluno que respondeu ao questionário:"
+        );
+        Aluno aluno = sistema.getAluno(matricula);
+
+        if (aluno == null) {
+            System.out.println("Não foi possível encontrar o aluno.");
+            return;
+        }
+        if (!aluno.regular()) {
+            System.out.println("O aluno informado já respondeu o questionário.");
+            return;
+        }
+
+        aluno.cadastrarResposta();
+        System.out.println("Resposta cadastrada com sucesso!");
     }
 }
