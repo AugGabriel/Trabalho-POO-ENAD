@@ -50,7 +50,28 @@ public class Sistema {
     
     public void cadastrarAluno(Aluno aluno, Curso curso) { this.alunos.add(aluno); }
     
-    public void listarAlunosIrregulares() {}
+    public void listarAlunosIrregulares() {
+        ArrayList<Aluno> irregulares = new ArrayList<>();
+
+        // Alunos ingressantes
+        for (Aluno aluno : this.alunos) {
+            if (aluno instanceof Ingressante && !aluno.regular()) {
+                irregulares.add(aluno);
+            }
+        }
+        
+        // Alunos concluintes
+        for (Aluno aluno : this.alunos) {
+            if (aluno instanceof Concluinte && !aluno.regular()) {
+                irregulares.add(aluno);
+            }
+        }
+        
+        // Saída de dados
+        for (Aluno aluno : irregulares) {
+            System.out.println(aluno.toString());
+        }
+    }
     
     public Aluno getAluno(String matricula) {
         for (Aluno aluno : this.alunos) {
