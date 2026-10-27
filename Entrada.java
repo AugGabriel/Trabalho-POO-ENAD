@@ -113,7 +113,7 @@ public class Entrada {
                 Entrada.cadastrarCurso(sistema);
                 break;
             case 3:
-                // Entrada.cadastrarIngressante(sistema);
+                Entrada.cadastrarIngressante(sistema);
                 break;
             case 4:
                 // Entrada.cadastrarConcluinte(sistema);
@@ -154,5 +154,41 @@ public class Entrada {
 
         sistema.cadastrarCurso(new Curso(codigo, nome), area);
         System.out.println("Curso cadastrado com sucesso!");
+    }
+
+    private static void cadastrarAluno(Sistema sistema, boolean ingressante) {
+        int semestreIngresso;
+        Aluno aluno;
+
+        String tipo = ingressante ? "ingressante" : "concluinte";
+
+        String nome = Entrada.lerLinha("Digite o nome do " + tipo + ": ");
+        String matricula = Entrada.lerLinha("Digite a matrícula do " + tipo + ": ");
+
+        if (ingressante) {
+            semestreIngresso = Entrada.lerInteiro("Digite o semestre de " + tipo + ": ");
+        }
+        else {}
+
+        System.out.println("Cursos cadastrados: ");
+        sistema.listarCursos();
+        String codigoCurso = Entrada.lerLinha("Digite o código do curso do aluno: ");
+        Curso curso = sistema.getCurso(codigoCurso);
+        
+        if (curso == null) {
+            System.out.println("Não foi possível encontrar o curso.");
+            return;
+        }
+
+        if (ingressante) {
+            aluno = new Ingressante(nome, matricula, semestreIngresso);
+        }
+        
+        sistema.cadastrarAluno(aluno, curso);
+        System.out.println("Ingressante cadastrado com sucesso!");
+    }
+    
+    public static void cadastrarIngressante(Sistema sistema) {
+        Entrada.cadastrarAluno(sistema, true);
     }
 }
