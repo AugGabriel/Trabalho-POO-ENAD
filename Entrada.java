@@ -161,17 +161,15 @@ public class Entrada {
         int semestreIngresso = -1;
         Aluno aluno;
 
-        String tipo = ingressante ? "Ingressante" : "Concluinte";
+        String tipo = ingressante ? "ingressante" : "concluinte";
 
         // Entrada de dados
-        String nome = Entrada.lerLinha("Digite o nome do " + tipo.toLowerCase() + ": ");
-        String matricula = Entrada.lerLinha("Digite a matrícula do " + tipo.toLowerCase() + ": ");
+        String nome = Entrada.lerLinha("Digite o nome do " + tipo + ": ");
+        String matricula = Entrada.lerLinha("Digite a matrícula do " + tipo + ": ");
 
         // Especificidades de ingressantes
         if (ingressante) {
-            semestreIngresso = Entrada.lerInteiro(
-                "Digite o semestre de " + tipo.toLowerCase() + ": "
-            );
+            semestreIngresso = Entrada.lerInteiro("Digite o semestre de " + tipo + ": ");
         }
 
         // Escolha do curso
@@ -194,7 +192,7 @@ public class Entrada {
         }
         
         sistema.cadastrarAluno(aluno, curso);
-        System.out.println(tipo + " cadastrado com sucesso!");
+        System.out.println("Aluno " + tipo + " cadastrado com sucesso!");
     }
     
     public static void cadastrarIngressante(Sistema sistema) {
