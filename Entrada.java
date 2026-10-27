@@ -75,11 +75,11 @@ public class Entrada {
      */
     public static int menu() {
         // Imprime o menu principal, lê a opção escolhida pelo usuário e retorna a opção selecionada.
-        String mensagem = "*********************\n" +
-                "Escolha uma opção:\n" +
-                "1) Cadastro\n" +
-                "2) Relatórios\n" +
-                "0) Sair\n";
+        String mensagem = "" +
+            "Escolha uma opção:\n" +
+            "1) Cadastro\n" +
+            "2) Relatórios\n" +
+            "0) Sair\n";
 
         int operacao = Entrada.lerInteiro(mensagem);
 
@@ -88,6 +88,7 @@ public class Entrada {
             operacao = Entrada.lerInteiro(mensagem);
         }
 
+        System.out.println();
         return operacao;
     }
 
@@ -128,6 +129,8 @@ public class Entrada {
                 System.out.println("Opção inválida.");
                 break;
         }
+
+        System.out.println();
     }
 
     public static void menuRelatorios(Sistema sistema) {
@@ -138,48 +141,20 @@ public class Entrada {
             "0) Voltar\n";
 
         int operacao = Entrada.lerInteiro(mensagem);
+        System.out.println();
 
         switch (operacao) {
             case 1:
-                int conceito;
-                conceito = Entrada.lerInteiro("Digite o conceito desejado (1 a 5): ");
-
-                if (conceito < 1 || conceito > 5) {
-                    System.out.println("Valor inválido.");
-                    return;
-                }
-
-                System.out.println("Cursos com conceito " + conceito);
-                sistema.listarResultados(conceito);
-                
+                Entrada.listarResultadosConceito(sistema);
                 break;
-
             case 2:
-                System.out.println("Áreas cadastradas: ");
-                sistema.listarAreas();
-
-                String codigo = Entrada.lerLinha("Digite o código da área do curso: ");
-                Area area = sistema.getArea(codigo);
-
-                if (area == null) {
-                    System.out.println("Área não encontrada.");
-                    return;
-                }
-
-                System.out.println("Conceitos dos cursos da área " + area.toString() + ": ");
-                sistema.listarResultados(area);
-
+                Entrada.listarResultadosArea(sistema);
                 break;
-
             case 3:
-                System.out.println("Alunos irregulares com o ENADE: ");
-                sistema.listarAlunosIrregulares();
-                
+                Entrada.listarAlunosIrregulares(sistema);
                 break;
-
             case 0:
                 break;
-
             default:
                 System.out.println("Opção inválida.");
                 break;
@@ -303,5 +278,39 @@ public class Entrada {
         );
         concluinte.cadastrarProva(notaFormacaoGeral, notaComponenteEspecifico);
         System.out.println("Prova cadastrada com sucesso!");
+    }
+
+    public static void listarResultadosConceito(Sistema sistema) {
+        int conceito;
+        conceito = Entrada.lerInteiro("Digite o conceito desejado (1 a 5): ");
+
+        if (conceito < 1 || conceito > 5) {
+            System.out.println("Valor inválido.");
+            return;
+        }
+
+        System.out.println("Cursos com conceito " + conceito);
+        sistema.listarResultados(conceito);
+    }
+
+    public static void listarResultadosArea(Sistema sistema) {
+        System.out.println("Áreas cadastradas: ");
+        sistema.listarAreas();
+
+        String codigo = Entrada.lerLinha("Digite o código da área do curso: ");
+        Area area = sistema.getArea(codigo);
+
+        if (area == null) {
+            System.out.println("Área não encontrada.");
+            return;
+        }
+
+        System.out.println("Conceitos dos cursos da área " + area.toString() + ": ");
+        sistema.listarResultados(area);
+    }
+
+    public static void listarAlunosIrregulares(Sistema sistema) {
+        System.out.println("Alunos irregulares com o ENADE: ");
+        sistema.listarAlunosIrregulares();
     }
 }
