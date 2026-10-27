@@ -72,11 +72,29 @@ public class Sistema {
             System.out.println(aluno.toString());
         }
     }
+
+    public void listarConcluintesNaoResponderam() {
+        for (Aluno aluno : this.alunos) {
+            if (aluno instanceof Concluinte && aluno.regular()) {
+                System.out.println(aluno.toString());
+            }
+        }
+    }
     
     public Aluno getAluno(String matricula) {
         for (Aluno aluno : this.alunos) {
             if (aluno.getMatricula().equals(matricula)) {
                 return aluno;
+            }
+        }
+        
+        return null;
+    }
+    
+    public Concluinte getConcluinte(String matricula) {
+        for (Aluno aluno : this.alunos) {
+            if (aluno instanceof Concluinte && aluno.getMatricula().equals(matricula)) {
+                return (Concluinte)aluno;
             }
         }
         

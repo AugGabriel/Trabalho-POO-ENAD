@@ -122,7 +122,7 @@ public class Entrada {
                 Entrada.cadastrarResposta(sistema);
                 break;
             case 6:
-                // Entrada.cadastrarProva(sistema);
+                Entrada.cadastrarResultadoProva(sistema);
                 break;
             default:
                 System.out.println("Opção Inválida.");
@@ -223,5 +223,29 @@ public class Entrada {
 
         aluno.cadastrarResposta();
         System.out.println("Resposta cadastrada com sucesso!");
+    }
+
+    public static void cadastrarResultadoProva(Sistema sistema) {
+        System.out.println("Concluintes cadastrados: ");
+        sistema.listarConcluintesNaoResponderam();
+
+        String matricula = Entrada.lerLinha("Digite a matrícula do aluno que realizou a prova: ");
+        Concluinte concluinte = sistema.getConcluinte(matricula);
+
+        if (concluinte == null) {
+            System.out.println("Não foi possível encontrar o concluinte.");
+            return;
+        }
+        if (concluinte.regular()) {
+            System.out.println("O concluinte informado já respondeu o questionário.");
+            return;
+        }
+
+        double notaFormacaoGeral = Entrada.lerDouble("Digite o valor da nota de formação geral:");
+        double notaComponenteEspecifico = Entrada.lerDouble(
+            "Digite o valor da nota de conhecimentos específicos:"
+        );
+        concluinte.cadastrarProva(notaFormacaoGeral, notaComponenteEspecifico);
+        System.out.println("Prova cadastrada com sucesso.");
     }
 }

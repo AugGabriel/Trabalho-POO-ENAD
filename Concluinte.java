@@ -16,6 +16,7 @@ public class Concluinte extends Aluno {
         this.notaFormacaoGeral = notaFormacaoGeral;
         this.notaComponenteEspecifico = notaComponenteEspecifico;
         this.presente = true;
+        this.cadastrarResposta();
     }
 
     public double calcularNota() {
