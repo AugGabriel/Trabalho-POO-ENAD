@@ -108,6 +108,15 @@ public class Sistema {
             System.out.println("Nenhum curso com conceito " + conceito + " foi encontrado.");
         }
     }
+    
+    public void listarResultados(Area area) {
+        if (area.getCursos().size() == 0) {
+            System.out.println("Nenhum curso na área " + area.getCodigo() + " foi encontrado.");
+            return;
+        }
 
-    public void listarResultados(String nomeArea) {}
+        for (Curso curso : area.getCursos()) {
+            System.out.println(curso.toString() + ": " + curso.calcularConceito());
+        }
+    }
 }

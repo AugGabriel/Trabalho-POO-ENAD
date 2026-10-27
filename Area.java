@@ -15,6 +15,8 @@ public class Area {
     
     public String getNome() { return this.nome; }
 
+    public ArrayList<Curso> getCursos() { return this.cursos; }
+
     public String toString() {
         return this.nome + " - (" + this.codigo + ")";
     }
