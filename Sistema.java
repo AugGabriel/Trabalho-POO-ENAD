@@ -66,9 +66,12 @@ public class Sistema {
         }
     }
 
-    public void listarConcluintesNaoResponderam() {
+    public void listarAlunosNaoResponderam(boolean apenasConcluintes) {
         for (Aluno aluno : this.alunos) {
-            if (aluno instanceof Concluinte && aluno.regular()) {
+            if (
+                aluno.getQuestionarioRespondido()
+                && (!apenasConcluintes || aluno instanceof Concluinte)
+            ) {
                 System.out.println(aluno.toString());
             }
         }
@@ -108,7 +111,7 @@ public class Sistema {
             System.out.println("Nenhum curso com conceito " + conceito + " foi encontrado.");
         }
     }
-    
+
     public void listarResultados(Area area) {
         if (area.getCursos().size() == 0) {
             System.out.println("Nenhum curso na área " + area.getCodigo() + " foi encontrado.");
