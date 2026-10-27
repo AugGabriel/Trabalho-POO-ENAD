@@ -11,7 +11,9 @@ public class Aluno {
 
     public String getMatricula() { return this.matricula; }
 
-    protected String stringParcial() {
+    public boolean getQuestionarioRespondido() { return this.questionarioRespondido; }
+
+    protected String toStringParcial() {
         return this.nome + " (" + this.matricula + ") - ";
     }
 

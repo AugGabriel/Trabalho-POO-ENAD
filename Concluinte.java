@@ -9,7 +9,7 @@ public class Concluinte extends Aluno {
     }
 
     public String toString() {
-        return this.stringParcial() + "CONCLUINTE";
+        return this.toStringParcial() + "CONCLUINTE";
     }
 
     public void cadastrarProva(double notaFormacaoGeral, double notaComponenteEspecifico) {
