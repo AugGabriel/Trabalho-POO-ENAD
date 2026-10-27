@@ -151,14 +151,31 @@ public class Entrada {
 
                 System.out.println("Cursos com conceito " + conceito);
                 sistema.listarResultados(conceito);
+                
                 break;
 
             case 2:
+                System.out.println("Áreas cadastradas: ");
+                sistema.listarAreas();
+
+                String codigo = Entrada.lerLinha("Digite o código da área do curso: ");
+                Area area = sistema.getArea(codigo);
+
+                if (area == null) {
+                    System.out.println("Área não encontrada.");
+                    return;
+                }
+
+                System.out.println("Conceitos dos cursos da área " + area.toString() + ": ");
                 sistema.listarResultados(area);
+
                 break;
+
             case 3:
+
             case 0:
                 break;
+
             default:
                 System.out.println("Opção inválida.");
                 break;
