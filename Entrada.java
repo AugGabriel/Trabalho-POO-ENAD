@@ -124,8 +124,11 @@ public class Entrada {
             case 6:
                 Entrada.cadastrarResultadoProva(sistema);
                 break;
+            case 0:
+                break;
             default:
                 System.out.println("Opção Inválida.");
+                break;
         }
 
     }
