@@ -116,7 +116,7 @@ public class Entrada {
                 Entrada.cadastrarIngressante(sistema);
                 break;
             case 4:
-                // Entrada.cadastrarConcluinte(sistema);
+                Entrada.cadastrarConcluinte(sistema);
                 break;
             case 5:
                 // Entrada.cadastrarResposta(sistema);
@@ -157,19 +157,24 @@ public class Entrada {
     }
 
     private static void cadastrarAluno(Sistema sistema, boolean ingressante) {
-        int semestreIngresso;
+        // Declaração de variáveis
+        int semestreIngresso = -1;
         Aluno aluno;
 
-        String tipo = ingressante ? "ingressante" : "concluinte";
+        String tipo = ingressante ? "Ingressante" : "Concluinte";
 
-        String nome = Entrada.lerLinha("Digite o nome do " + tipo + ": ");
-        String matricula = Entrada.lerLinha("Digite a matrícula do " + tipo + ": ");
+        // Entrada de dados
+        String nome = Entrada.lerLinha("Digite o nome do " + tipo.toLowerCase() + ": ");
+        String matricula = Entrada.lerLinha("Digite a matrícula do " + tipo.toLowerCase() + ": ");
 
+        // Especificidades de ingressantes
         if (ingressante) {
-            semestreIngresso = Entrada.lerInteiro("Digite o semestre de " + tipo + ": ");
+            semestreIngresso = Entrada.lerInteiro(
+                "Digite o semestre de " + tipo.toLowerCase() + ": "
+            );
         }
-        else {}
 
+        // Escolha do curso
         System.out.println("Cursos cadastrados: ");
         sistema.listarCursos();
         String codigoCurso = Entrada.lerLinha("Digite o código do curso do aluno: ");
@@ -180,15 +185,23 @@ public class Entrada {
             return;
         }
 
+        // Cadastro dos alunos
         if (ingressante) {
             aluno = new Ingressante(nome, matricula, semestreIngresso);
         }
+        else {
+            aluno = new Concluinte(nome, matricula);
+        }
         
         sistema.cadastrarAluno(aluno, curso);
-        System.out.println("Ingressante cadastrado com sucesso!");
+        System.out.println(tipo + " cadastrado com sucesso!");
     }
     
     public static void cadastrarIngressante(Sistema sistema) {
         Entrada.cadastrarAluno(sistema, true);
+    }
+
+    public static void cadastrarConcluinte(Sistema sistema) {
+        Entrada.cadastrarAluno(sistema, false);
     }
 }
