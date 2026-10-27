@@ -15,7 +15,15 @@ public class Area {
     
     public String getNome() { return this.nome; }
 
-    public ArrayList<Curso> getCursos() { return this.cursos; }
+    public ArrayList<Curso> getCursos() { 
+        ArrayList<Curso> copia = new ArrayList<>();
+
+        for (Curso curso : this.cursos) {
+            copia.add(curso);
+        }
+
+        return copia;
+    }
 
     public String toString() {
         return this.nome + " - (" + this.codigo + ")";
