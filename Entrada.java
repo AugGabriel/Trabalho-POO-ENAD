@@ -82,8 +82,8 @@ public class Entrada {
             "0) Sair\n";
 
         int operacao = Entrada.lerInteiro(mensagem);
-
         System.out.println();
+
         return operacao;
     }
 
@@ -98,6 +98,7 @@ public class Entrada {
             "0) Voltar\n";
 
         int operacao = Entrada.lerInteiro(mensagem);
+        System.out.println();
 
         switch(operacao) {
             case 1:
@@ -165,6 +166,11 @@ public class Entrada {
     }
 
     public static void cadastrarCurso(Sistema sistema) {
+        if (sistema.getSizeAreas() == 0) {
+            System.out.println("Cadastre uma área primeiro.");
+            return;
+        }
+
         String nome = Entrada.lerLinha("Digite o nome do curso: ");
         String codigo = Entrada.lerLinha("Digite o código do curso: ");
 
@@ -183,6 +189,12 @@ public class Entrada {
     }
 
     private static void cadastrarAluno(Sistema sistema, boolean ingressante) {
+        // Validação de pré-requisitos
+        if (sistema.getSizeCursos() == 0) {
+            System.out.println("Cadastre um curso primeiro.");
+            return;
+        }
+
         // Declaração de variáveis
         int semestreIngresso = -1;
         Aluno aluno;
@@ -230,6 +242,13 @@ public class Entrada {
     }
 
     public static void cadastrarResposta(Sistema sistema) {
+        if (sistema.getSizeAlunosNaoResponderam(false) == 0) {
+            System.out.println(
+                "Não há nenhum aluno que não respondeu o questionário cadastrado."
+            );
+            return;
+        }
+
         System.out.println("Alunos cadastrados: ");
         sistema.listarAlunosNaoResponderam(false);
 
@@ -252,6 +271,13 @@ public class Entrada {
     }
 
     public static void cadastrarResultadoProva(Sistema sistema) {
+        if (sistema.getSizeAlunosNaoResponderam(true) == 0) {
+            System.out.println(
+                "Não há nenhum aluno que não respondeu o questionário cadastrado."
+            );
+            return;
+        }
+
         System.out.println("Concluintes cadastrados: ");
         sistema.listarAlunosNaoResponderam(true);
 
@@ -276,7 +302,7 @@ public class Entrada {
     }
 
     public static void listarResultadosConceito(Sistema sistema) {
-        if (sistema.getCursos().size() == 0) {
+        if (sistema.getSizeCursos() == 0) {
             System.out.println("Ainda não há nenhum curso cadastrado.");
             return;
         }
@@ -294,7 +320,7 @@ public class Entrada {
     }
 
     public static void listarResultadosArea(Sistema sistema) {
-        if (sistema.getCursos().size() == 0) {
+        if (sistema.getSizeCursos() == 0) {
             System.out.println("Ainda não há nenhum curso cadastrado.");
             return;
         }
@@ -315,7 +341,7 @@ public class Entrada {
     }
 
     public static void listarAlunosIrregulares(Sistema sistema) {
-        if (sistema.getAlunos().size() == 0) {
+        if (sistema.getSizeAlunos() == 0) {
             System.out.println("Ainda não há nenhum aluno cadastrado.");
             return;
         }
