@@ -281,6 +281,11 @@ public class Entrada {
     }
 
     public static void listarResultadosConceito(Sistema sistema) {
+        if (sistema.getCursos().size() == 0) {
+            System.out.println("Ainda não há nenhum curso cadastrado.");
+            return;
+        }
+
         int conceito;
         conceito = Entrada.lerInteiro("Digite o conceito desejado (1 a 5): ");
 
@@ -294,6 +299,11 @@ public class Entrada {
     }
 
     public static void listarResultadosArea(Sistema sistema) {
+        if (sistema.getCursos().size() == 0) {
+            System.out.println("Ainda não há nenhum curso cadastrado.");
+            return;
+        }
+
         System.out.println("Áreas cadastradas: ");
         sistema.listarAreas();
 
@@ -310,6 +320,11 @@ public class Entrada {
     }
 
     public static void listarAlunosIrregulares(Sistema sistema) {
+        if (sistema.getAlunos().size() == 0) {
+            System.out.println("Ainda não há nenhum aluno cadastrado.");
+            return;
+        }
+
         System.out.println("Alunos irregulares com o ENADE: ");
         sistema.listarAlunosIrregulares();
     }

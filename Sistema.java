@@ -47,6 +47,16 @@ public class Sistema {
         
         return null;
     }
+
+    public ArrayList<Curso> getCursos() {
+        ArrayList<Curso> copia = new ArrayList<>();
+
+        for (Curso curso : this.cursos) {
+            copia.add(curso);
+        }
+
+        return copia;
+    }
     
     public void cadastrarAluno(Aluno aluno, Curso curso) { this.alunos.add(aluno); }
     
@@ -79,6 +89,16 @@ public class Sistema {
         }
         
         return null;
+    }
+
+    public ArrayList<Aluno> getAlunos() {
+        ArrayList<Aluno> copia = new ArrayList<>();
+
+        for (Aluno aluno : this.alunos) {
+            copia.add(aluno);
+        }
+
+        return copia;
     }
     
     public Concluinte getConcluinte(String matricula) {
