@@ -8,6 +8,8 @@ public class Concluinte extends Aluno {
         this.presente = false;
     }
 
+    public boolean getPresente() { return this.presente; }
+
     public String toString() {
         return this.toStringParcial() + "CONCLUINTE";
     }

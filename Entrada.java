@@ -242,15 +242,15 @@ public class Entrada {
     }
 
     public static void cadastrarResposta(Sistema sistema) {
-        if (sistema.getSizeAlunosNaoResponderam(false) == 0) {
+        if (sistema.getSizeAlunosNaoResponderam() == 0) {
             System.out.println(
-                "Não há nenhum aluno que não respondeu o questionário cadastrado."
+                "Não há nenhum aluno cadastrado que não respondeu o questionário."
             );
             return;
         }
 
         System.out.println("Alunos cadastrados: ");
-        sistema.listarAlunosNaoResponderam(false);
+        sistema.listarAlunosNaoResponderam();
 
         String matricula = Entrada.lerLinha(
             "Digite a matrícula do aluno que respondeu ao questionário:"
@@ -271,15 +271,15 @@ public class Entrada {
     }
 
     public static void cadastrarResultadoProva(Sistema sistema) {
-        if (sistema.getSizeAlunosNaoResponderam(true) == 0) {
+        if (sistema.getSizeConcluintesNaoPresentes() == 0) {
             System.out.println(
-                "Não há nenhum aluno que não respondeu o questionário cadastrado."
+                "Não há nenhum aluno concluinte cadastrado que não esteve presente."
             );
             return;
         }
 
         System.out.println("Concluintes cadastrados: ");
-        sistema.listarAlunosNaoResponderam(true);
+        sistema.listarConcluintesNaoPresentes();
 
         String matricula = Entrada.lerLinha("Digite a matrícula do aluno que realizou a prova: ");
         Concluinte concluinte = sistema.getConcluinte(matricula);
@@ -288,8 +288,8 @@ public class Entrada {
             System.out.println("Não foi possível encontrar o concluinte.");
             return;
         }
-        if (concluinte.regular()) {
-            System.out.println("O concluinte informado já respondeu o questionário.");
+        if (concluinte.getPresente()) {
+            System.out.println("O concluinte informado já está marcado como presente.");
             return;
         }
 
