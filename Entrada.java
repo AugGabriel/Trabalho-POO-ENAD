@@ -207,7 +207,7 @@ public class Entrada {
 
         // Especificidades de ingressantes
         if (ingressante) {
-            semestreIngresso = Entrada.lerInteiro("Digite o semestre de " + tipo + ": ");
+            semestreIngresso = Entrada.lerInteiro("Digite o semestre de ingresso: ");
         }
 
         // Escolha do curso
