@@ -5,20 +5,20 @@ import java.util.Scanner;
 
 /**
  * Classe com as rotinas de entrada e saída do projeto
- * @author Hilario Seibel Junior e Gabriel Augusto Pereira
+ * @author Hilario Seibel Junior, Gabriel Augusto Pereira e João Vitor Calmon
  */
 public class Entrada {
 
     private static Scanner leitor;
 
     /**
-     * Se houver um arquivo input.txt na pasta em que o projeto está sendo executado,
+     * Se houver um arquivo disabled.txt na pasta em que o projeto está sendo executado,
      * define que o Scanner vai ler deste arquivo e não do teclado.
      * Se o arquivo não existir, define que o Scanner vai ler da entrada padrão (teclado)
      */
     public static void abrirEntrada() {
         try {
-            // Se houver um arquivo input.txt, o Scanner vai ler dele.
+            // Se houver um arquivo disabled.txt, o Scanner vai ler dele.
             leitor = new Scanner(new FileInputStream("input.txt")).useLocale(Locale.US);
 
         } catch (FileNotFoundException e) {
@@ -176,7 +176,7 @@ public class Entrada {
         System.out.println("Áreas cadastradas:");
         sistema.listarAreas();
         String codigoArea = Entrada.lerLinha("Digite o código da área do curso: ");
-        Area area = sistema.getArea(codigoArea);
+        Area area = sistema.getAreaPorCodigo(codigoArea);
 
         if (area == null) {
             System.out.println("Não foi possível encontrar a área.");
@@ -297,8 +297,8 @@ public class Entrada {
         System.out.println("Áreas cadastradas: ");
         sistema.listarAreas();
 
-        String codigo = Entrada.lerLinha("Digite o código da área do curso: ");
-        Area area = sistema.getArea(codigo);
+        String nome = Entrada.lerLinha("Digite o nome da área: ");
+        Area area = sistema.getAreaPorNome(nome);
 
         if (area == null) {
             System.out.println("Área não encontrada.");

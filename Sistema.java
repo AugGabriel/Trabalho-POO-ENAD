@@ -16,11 +16,21 @@ public class Sistema {
 
     public void listarAreas() {
         for (Area area : this.areas) {
-            System.out.println(area.getCodigo() + " - " + area.getNome());
+            System.out.println(area.toStringListagem());
         }
     }
 
-    public Area getArea(String codigo) {
+    public Area getAreaPorCurso(Curso curso) {
+        for (Area area : this.areas) {
+            if (area.getCursos().contains(curso)) {
+                return area;
+            }
+        }
+
+        return null;
+    }
+
+    public Area getAreaPorCodigo(String codigo) {
         for (Area area : this.areas) {
             if (area.getCodigo().equals(codigo)) {
                 return area;
@@ -30,11 +40,26 @@ public class Sistema {
         return null;
     }
 
-    public void cadastrarCurso(Curso curso, Area area) { this.cursos.add(curso); }
+    public Area getAreaPorNome(String nome) {
+        for (Area area : this.areas) {
+            if (area.getNome().equals(nome)) {
+                return area;
+            }
+        }
+
+        return null;
+    }
+
+
+
+    public void cadastrarCurso(Curso curso, Area area) {
+        this.cursos.add(curso);
+        area.adicionarCurso(curso);
+    }
 
     public void listarCursos() {
         for (Curso curso : this.cursos) {
-            System.out.println(curso.getCodigo() + " - " + curso.getNome());
+            System.out.println(curso.toStringListagem());
         }
     }
 
@@ -48,7 +73,10 @@ public class Sistema {
         return null;
     }
     
-    public void cadastrarAluno(Aluno aluno, Curso curso) { this.alunos.add(aluno); }
+    public void cadastrarAluno(Aluno aluno, Curso curso) {
+        this.alunos.add(aluno);
+        curso.adicionarAluno(aluno);
+    }
     
     public void listarAlunosIrregulares() {
         for (Curso curso : this.cursos) {
@@ -97,7 +125,8 @@ public class Sistema {
         for (Curso curso : this.cursos) {
             if (curso.calcularConceito() == conceito) {
                 houveCorrespondencia = true;
-                System.out.println(curso.toString());
+                Area area = this.getAreaPorCurso(curso);
+                System.out.println(curso.toStringListagem() + " - Área: " + area.toStringListagem());
             }
         }
 

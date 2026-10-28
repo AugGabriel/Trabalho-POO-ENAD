@@ -5,13 +5,13 @@ public class Main {
         Sistema sistema = new Sistema();
 
         while (true) {
-            int operacacao = Entrada.menu();
+            int operacao = Entrada.menu();
 
-            if (operacacao == 0) {
+            if (operacao == 0) {
                 break;
             }
 
-            switch(operacacao) {
+            switch(operacao) {
                 case 1:
                     Entrada.menuCadastro(sistema);
                     break;

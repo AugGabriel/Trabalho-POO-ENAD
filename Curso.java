@@ -25,8 +25,19 @@ public class Curso {
         return copia;
      }
 
+    /**
+     * Implementação de toString() conforme PDF de especificação da Atividade 2.
+     */
     public String toString() {
         return this.nome + " - " + this.codigo;
+    }
+
+    /**
+     * Implementação de toString() conforme a "Saída correta", especificada na tarefa do AVA do Atividade 2.
+     * Usado nas listagens.
+     */
+    public String toStringListagem() {
+        return this.nome + " (" + this.codigo + ")";
     }
 
     public void adicionarAluno(Aluno aluno) {
