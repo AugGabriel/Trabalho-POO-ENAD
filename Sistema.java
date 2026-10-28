@@ -32,7 +32,10 @@ public class Sistema {
 
     public int getSizeAreas() { return this.areas.size(); }
 
-    public void cadastrarCurso(Curso curso, Area area) { this.cursos.add(curso); }
+    public void cadastrarCurso(Curso curso, Area area) {
+        this.cursos.add(curso);
+        area.adicionarCurso(curso);
+    }
 
     public void listarCursos() {
         for (Curso curso : this.cursos) {
@@ -52,7 +55,10 @@ public class Sistema {
 
     public int getSizeCursos() { return this.cursos.size(); }
     
-    public void cadastrarAluno(Aluno aluno, Curso curso) { this.alunos.add(aluno); }
+    public void cadastrarAluno(Aluno aluno, Curso curso) {
+        this.alunos.add(aluno);
+        curso.adicionarAluno(aluno);
+    }
     
     public void listarAlunosIrregulares() {
         for (Curso curso : this.cursos) {
@@ -76,11 +82,15 @@ public class Sistema {
 
     public int getSizeAlunos() { return this.alunos.size(); }
 
+    public ArrayList<Aluno> getAlunos() {
+        return new ArrayList<>(this.alunos);
+    }
+
     private ArrayList<Aluno> getAlunosNaoResponderam() {
         ArrayList<Aluno> alunosNaoResponderam = new ArrayList<>();
 
         for (Aluno aluno : this.alunos) {
-            if (aluno.getQuestionarioRespondido()) {
+            if (!aluno.getQuestionarioRespondido()) {
                 alunosNaoResponderam.add(aluno);
             }
         }
@@ -105,7 +115,7 @@ public class Sistema {
             if (aluno instanceof Concluinte) {
                 Concluinte concluinte = (Concluinte)aluno;
 
-                if (concluinte.getPresente()) {
+                if (!concluinte.getPresente()) {
                     concluintesNaoPresentes.add(concluinte);
                 }
             }

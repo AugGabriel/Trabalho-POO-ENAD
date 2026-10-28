@@ -289,7 +289,7 @@ public class Entrada {
             return;
         }
         if (concluinte.getPresente()) {
-            System.out.println("O concluinte informado já está marcado como presente.");
+            System.out.println("O concluinte informado já realizou a prova.");
             return;
         }
 
