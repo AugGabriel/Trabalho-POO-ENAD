@@ -113,10 +113,6 @@ public class Sistema {
 
     public int getSizeAlunos() { return this.alunos.size(); }
 
-    public ArrayList<Aluno> getAlunos() {
-        return new ArrayList<>(this.alunos);
-    }
-
     private ArrayList<Aluno> getAlunosNaoResponderam() {
         ArrayList<Aluno> alunosNaoResponderam = new ArrayList<>();
 

@@ -309,7 +309,9 @@ public class Entrada {
             return;
         }
 
-        double notaFormacaoGeral = Entrada.lerDouble("Digite o valor da nota de formação geral: ");
+        double notaFormacaoGeral = Entrada.lerDouble(
+            "Digite o valor da nota de formação geral: "
+        );
         double notaComponenteEspecifico = Entrada.lerDouble(
             "Digite o valor da nota de conhecimentos específicos: "
         );
