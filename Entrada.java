@@ -161,6 +161,11 @@ public class Entrada {
         String nome = Entrada.lerLinha("Digite o nome da área: ");
         String codigo = Entrada.lerLinha("Digite o código da área: ");
 
+        if (sistema.getArea(codigo) != null) {
+            System.out.println("Uma área com esse código já foi cadastrada.");
+            return;
+        }
+
         sistema.cadastrarArea(new Area(nome, codigo));
         System.out.println("Área cadastrada com sucesso!");
     }
@@ -173,6 +178,11 @@ public class Entrada {
 
         String nome = Entrada.lerLinha("Digite o nome do curso: ");
         String codigo = Entrada.lerLinha("Digite o código do curso: ");
+
+        if (sistema.getCurso(codigo) != null) {
+            System.out.println("Um curso com esse código já foi cadastrado.");
+            return;
+        }
 
         System.out.println("Áreas cadastradas:");
         sistema.listarAreas();
@@ -204,6 +214,12 @@ public class Entrada {
         // Entrada de dados
         String nome = Entrada.lerLinha("Digite o nome do " + tipo + ": ");
         String matricula = Entrada.lerLinha("Digite a matrícula do " + tipo + ": ");
+
+        // Validação da entrada
+        if (sistema.getAluno(matricula) != null) {
+            System.out.println("Um aluno com essa matrícula já foi cadastrado.");
+            return;
+        }
 
         // Especificidades de ingressantes
         if (ingressante) {
