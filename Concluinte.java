@@ -11,14 +11,13 @@ public class Concluinte extends Aluno {
     public boolean getPresente() { return this.presente; }
 
     public String toString() {
-        return this.toStringParcial() + "CONCLUINTE";
+        return super.toString() + " - CONCLUINTE";
     }
 
     public void cadastrarProva(double notaFormacaoGeral, double notaComponenteEspecifico) {
         this.notaFormacaoGeral = notaFormacaoGeral;
         this.notaComponenteEspecifico = notaComponenteEspecifico;
         this.presente = true;
-        this.cadastrarResposta();
     }
 
     public double calcularNota() {

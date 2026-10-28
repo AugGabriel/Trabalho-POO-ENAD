@@ -25,6 +25,5 @@ public class Main {
         }
 
         Entrada.fecharEntrada();
-        System.out.println("Até mais! :D");
     }
 }

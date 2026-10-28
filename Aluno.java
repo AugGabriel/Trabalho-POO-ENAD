@@ -17,6 +17,11 @@ public class Aluno {
         return this.nome + " (" + this.matricula + ") - ";
     }
 
+    public String toString() {
+        return this.nome + " (" + this.matricula + ")";
+    }
+
+
     public boolean regular() {
         return this.questionarioRespondido;
     }

@@ -60,7 +60,6 @@ public class Entrada {
     /**
      * Faz a leitura de um double
      * @param mensagem: Mensagem que será exibida ao usuário
-     * @param input: Um objeto da classe Scanner de onde a entrada está sendo lida
      * @return O número digitado pelo usuário convertido para double
      */
     public static double lerDouble(String mensagem) {
@@ -89,6 +88,7 @@ public class Entrada {
 
     public static void menuCadastro(Sistema sistema) {
         String mensagem = "" +
+            "Escolha uma opção:\n" +
             "1) Cadastrar Área\n" +
             "2) Cadastrar Curso\n" +
             "3) Cadastrar Aluno Ingressante\n" +
@@ -161,7 +161,7 @@ public class Entrada {
         String nome = Entrada.lerLinha("Digite o nome da área: ");
         String codigo = Entrada.lerLinha("Digite o código da área: ");
 
-        if (sistema.getArea(codigo) != null) {
+        if (sistema.getAreaPorCodigo(codigo) != null) {
             System.out.println("Uma área com esse código já foi cadastrada.");
             return;
         }
@@ -227,7 +227,7 @@ public class Entrada {
         }
 
         // Escolha do curso
-        System.out.println("Cursos cadastrados: ");
+        System.out.println("Cursos cadastrados:");
         sistema.listarCursos();
         String codigoCurso = Entrada.lerLinha("Digite o código do curso do aluno: ");
         Curso curso = sistema.getCurso(codigoCurso);
@@ -265,11 +265,11 @@ public class Entrada {
             return;
         }
 
-        System.out.println("Alunos cadastrados: ");
+        System.out.println("Alunos cadastrados:");
         sistema.listarAlunosNaoResponderam();
 
         String matricula = Entrada.lerLinha(
-            "Digite a matrícula do aluno que respondeu ao questionário:"
+            "Digite a matrícula do aluno que respondeu ao questionário: "
         );
         Aluno aluno = sistema.getAluno(matricula);
 
@@ -294,7 +294,7 @@ public class Entrada {
             return;
         }
 
-        System.out.println("Concluintes cadastrados: ");
+        System.out.println("Concluintes cadastrados:");
         sistema.listarConcluintesNaoPresentes();
 
         String matricula = Entrada.lerLinha("Digite a matrícula do aluno que realizou a prova: ");
@@ -309,9 +309,9 @@ public class Entrada {
             return;
         }
 
-        double notaFormacaoGeral = Entrada.lerDouble("Digite o valor da nota de formação geral:");
+        double notaFormacaoGeral = Entrada.lerDouble("Digite o valor da nota de formação geral: ");
         double notaComponenteEspecifico = Entrada.lerDouble(
-            "Digite o valor da nota de conhecimentos específicos:"
+            "Digite o valor da nota de conhecimentos específicos: "
         );
         concluinte.cadastrarProva(notaFormacaoGeral, notaComponenteEspecifico);
         System.out.println("Prova cadastrada com sucesso!");
@@ -331,7 +331,7 @@ public class Entrada {
             return;
         }
 
-        System.out.println("Cursos com conceito " + conceito);
+        System.out.println("Cursos com conceito " + conceito + ":");
         sistema.listarResultados(conceito);
     }
 
@@ -341,7 +341,7 @@ public class Entrada {
             return;
         }
 
-        System.out.println("Áreas cadastradas: ");
+        System.out.println("Áreas cadastradas:");
         sistema.listarAreas();
 
         String nome = Entrada.lerLinha("Digite o nome da área: ");
@@ -352,7 +352,7 @@ public class Entrada {
             return;
         }
 
-        System.out.println("Conceitos dos cursos da área " + area.toString() + ": ");
+        System.out.println("Conceitos dos cursos da área " + area.toStringListagem() + ":");
         sistema.listarResultados(area);
     }
 
@@ -362,7 +362,7 @@ public class Entrada {
             return;
         }
 
-        System.out.println("Alunos irregulares com o ENADE: ");
+        System.out.println("Alunos irregulares com o ENADE:");
         sistema.listarAlunosIrregulares();
     }
 }

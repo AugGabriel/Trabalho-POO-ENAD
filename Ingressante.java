@@ -10,6 +10,6 @@ public class Ingressante extends Aluno {
     public int getSemestreIngresso() { return this.semestreIngresso; }
 
     public String toString() {
-        return this.toStringParcial() + "INGRESSANTE";
+        return super.toString() + " - INGRESSANTE";
     }
 }

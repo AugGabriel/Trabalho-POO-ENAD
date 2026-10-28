@@ -84,7 +84,7 @@ public class Sistema {
         for (Curso curso : this.cursos) {
             for (Aluno aluno : curso.getAlunos()) {
                 if (!aluno.regular()) {
-                    System.out.println(aluno.toString() + " - " + curso.toString());
+                    System.out.println(aluno.toString() + " - Curso: " + curso.toStringListagem());
                 }
             }
         }
@@ -198,7 +198,7 @@ public class Sistema {
         }
 
         for (Curso curso : area.getCursos()) {
-            System.out.println(curso.toString() + ": " + curso.calcularConceito());
+            System.out.println(curso.toStringListagem() + ": " + curso.calcularConceito());
         }
     }
 }
