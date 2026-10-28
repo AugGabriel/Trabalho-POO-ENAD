@@ -75,18 +75,13 @@ public class Entrada {
      */
     public static int menu() {
         // Imprime o menu principal, lê a opção escolhida pelo usuário e retorna a opção selecionada.
-        String mensagem = "" +
+        String mensagem = "\n" +
             "Escolha uma opção:\n" +
             "1) Cadastro\n" +
             "2) Relatórios\n" +
             "0) Sair\n";
 
         int operacao = Entrada.lerInteiro(mensagem);
-
-        while (operacao < 0 || operacao > 2) {
-            System.out.println("Opção inválida. Tente novamente: ");
-            operacao = Entrada.lerInteiro(mensagem);
-        }
 
         System.out.println();
         return operacao;
