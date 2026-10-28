@@ -75,20 +75,15 @@ public class Entrada {
      */
     public static int menu() {
         // Imprime o menu principal, lê a opção escolhida pelo usuário e retorna a opção selecionada.
-        String mensagem = "" +
+        String mensagem = "\n" +
             "Escolha uma opção:\n" +
             "1) Cadastro\n" +
             "2) Relatórios\n" +
             "0) Sair\n";
 
         int operacao = Entrada.lerInteiro(mensagem);
-
-        while (operacao < 0 || operacao > 2) {
-            System.out.println("Opção inválida. Tente novamente: ");
-            operacao = Entrada.lerInteiro(mensagem);
-        }
-
         System.out.println();
+
         return operacao;
     }
 
@@ -103,6 +98,7 @@ public class Entrada {
             "0) Voltar\n";
 
         int operacao = Entrada.lerInteiro(mensagem);
+        System.out.println();
 
         switch(operacao) {
             case 1:
@@ -165,13 +161,28 @@ public class Entrada {
         String nome = Entrada.lerLinha("Digite o nome da área: ");
         String codigo = Entrada.lerLinha("Digite o código da área: ");
 
+        if (sistema.getArea(codigo) != null) {
+            System.out.println("Uma área com esse código já foi cadastrada.");
+            return;
+        }
+
         sistema.cadastrarArea(new Area(nome, codigo));
         System.out.println("Área cadastrada com sucesso!");
     }
 
     public static void cadastrarCurso(Sistema sistema) {
+        if (sistema.getSizeAreas() == 0) {
+            System.out.println("Cadastre uma área primeiro.");
+            return;
+        }
+
         String nome = Entrada.lerLinha("Digite o nome do curso: ");
         String codigo = Entrada.lerLinha("Digite o código do curso: ");
+
+        if (sistema.getCurso(codigo) != null) {
+            System.out.println("Um curso com esse código já foi cadastrado.");
+            return;
+        }
 
         System.out.println("Áreas cadastradas:");
         sistema.listarAreas();
@@ -188,6 +199,12 @@ public class Entrada {
     }
 
     private static void cadastrarAluno(Sistema sistema, boolean ingressante) {
+        // Validação de pré-requisitos
+        if (sistema.getSizeCursos() == 0) {
+            System.out.println("Cadastre um curso primeiro.");
+            return;
+        }
+
         // Declaração de variáveis
         int semestreIngresso = -1;
         Aluno aluno;
@@ -198,9 +215,15 @@ public class Entrada {
         String nome = Entrada.lerLinha("Digite o nome do " + tipo + ": ");
         String matricula = Entrada.lerLinha("Digite a matrícula do " + tipo + ": ");
 
+        // Validação da entrada
+        if (sistema.getAluno(matricula) != null) {
+            System.out.println("Um aluno com essa matrícula já foi cadastrado.");
+            return;
+        }
+
         // Especificidades de ingressantes
         if (ingressante) {
-            semestreIngresso = Entrada.lerInteiro("Digite o semestre de " + tipo + ": ");
+            semestreIngresso = Entrada.lerInteiro("Digite o semestre de ingresso: ");
         }
 
         // Escolha do curso
@@ -235,8 +258,15 @@ public class Entrada {
     }
 
     public static void cadastrarResposta(Sistema sistema) {
+        if (sistema.getSizeAlunosNaoResponderam() == 0) {
+            System.out.println(
+                "Não há nenhum aluno cadastrado que não respondeu o questionário."
+            );
+            return;
+        }
+
         System.out.println("Alunos cadastrados: ");
-        sistema.listarAlunosNaoResponderam(false);
+        sistema.listarAlunosNaoResponderam();
 
         String matricula = Entrada.lerLinha(
             "Digite a matrícula do aluno que respondeu ao questionário:"
@@ -257,8 +287,15 @@ public class Entrada {
     }
 
     public static void cadastrarResultadoProva(Sistema sistema) {
+        if (sistema.getSizeConcluintesNaoPresentes() == 0) {
+            System.out.println(
+                "Não há nenhum aluno concluinte cadastrado que não esteve presente."
+            );
+            return;
+        }
+
         System.out.println("Concluintes cadastrados: ");
-        sistema.listarAlunosNaoResponderam(true);
+        sistema.listarConcluintesNaoPresentes();
 
         String matricula = Entrada.lerLinha("Digite a matrícula do aluno que realizou a prova: ");
         Concluinte concluinte = sistema.getConcluinte(matricula);
@@ -267,8 +304,8 @@ public class Entrada {
             System.out.println("Não foi possível encontrar o concluinte.");
             return;
         }
-        if (concluinte.regular()) {
-            System.out.println("O concluinte informado já respondeu o questionário.");
+        if (concluinte.getPresente()) {
+            System.out.println("O concluinte informado já realizou a prova.");
             return;
         }
 
@@ -281,6 +318,11 @@ public class Entrada {
     }
 
     public static void listarResultadosConceito(Sistema sistema) {
+        if (sistema.getSizeCursos() == 0) {
+            System.out.println("Ainda não há nenhum curso cadastrado.");
+            return;
+        }
+
         int conceito;
         conceito = Entrada.lerInteiro("Digite o conceito desejado (1 a 5): ");
 
@@ -294,6 +336,11 @@ public class Entrada {
     }
 
     public static void listarResultadosArea(Sistema sistema) {
+        if (sistema.getSizeCursos() == 0) {
+            System.out.println("Ainda não há nenhum curso cadastrado.");
+            return;
+        }
+
         System.out.println("Áreas cadastradas: ");
         sistema.listarAreas();
 
@@ -310,6 +357,11 @@ public class Entrada {
     }
 
     public static void listarAlunosIrregulares(Sistema sistema) {
+        if (sistema.getSizeAlunos() == 0) {
+            System.out.println("Ainda não há nenhum aluno cadastrado.");
+            return;
+        }
+
         System.out.println("Alunos irregulares com o ENADE: ");
         sistema.listarAlunosIrregulares();
     }

@@ -45,12 +45,16 @@ public class Curso {
     }
 
     public double calcularMedia() {
-        int soma = 0, quantidade = 0;
+        double soma = 0;
+        int quantidade = 0;
 
         for (Aluno aluno : this.alunos) {
             if (aluno instanceof Concluinte) {
-                soma += ((Concluinte)aluno).calcularNota();
-                quantidade += 1;
+                Concluinte concluinte = (Concluinte) aluno;
+                if (concluinte.getPresente()) {
+                    soma += concluinte.calcularNota();
+                    quantidade++;
+                }
             }
         }
 

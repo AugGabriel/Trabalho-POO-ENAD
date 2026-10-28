@@ -50,7 +50,7 @@ public class Sistema {
         return null;
     }
 
-
+    public int getSizeAreas() { return this.areas.size(); }
 
     public void cadastrarCurso(Curso curso, Area area) {
         this.cursos.add(curso);
@@ -72,7 +72,9 @@ public class Sistema {
         
         return null;
     }
-    
+
+    public int getSizeCursos() { return this.cursos.size(); }
+
     public void cadastrarAluno(Aluno aluno, Curso curso) {
         this.alunos.add(aluno);
         curso.adicionarAluno(aluno);
@@ -108,7 +110,61 @@ public class Sistema {
         
         return null;
     }
-    
+
+    public int getSizeAlunos() { return this.alunos.size(); }
+
+    public ArrayList<Aluno> getAlunos() {
+        return new ArrayList<>(this.alunos);
+    }
+
+    private ArrayList<Aluno> getAlunosNaoResponderam() {
+        ArrayList<Aluno> alunosNaoResponderam = new ArrayList<>();
+
+        for (Aluno aluno : this.alunos) {
+            if (!aluno.getQuestionarioRespondido()) {
+                alunosNaoResponderam.add(aluno);
+            }
+        }
+
+        return alunosNaoResponderam;
+    }
+
+    public void listarAlunosNaoResponderam() {
+        for (Aluno aluno : this.getAlunosNaoResponderam()) {
+            System.out.println(aluno.toString());
+        }
+    }
+
+    public int getSizeAlunosNaoResponderam() {
+        return this.getAlunosNaoResponderam().size();
+    }
+
+    private ArrayList<Concluinte> getConcluintesNaoPresentes() {
+        ArrayList<Concluinte> concluintesNaoPresentes = new ArrayList<>();
+
+        for (Aluno aluno : this.alunos) {
+            if (aluno instanceof Concluinte) {
+                Concluinte concluinte = (Concluinte)aluno;
+
+                if (!concluinte.getPresente()) {
+                    concluintesNaoPresentes.add(concluinte);
+                }
+            }
+        }
+
+        return concluintesNaoPresentes;
+    }
+
+    public void listarConcluintesNaoPresentes() {
+        for (Concluinte aluno : this.getConcluintesNaoPresentes()) {
+            System.out.println(aluno.toString());
+        }
+    }
+
+    public int getSizeConcluintesNaoPresentes() {
+        return this.getConcluintesNaoPresentes().size();
+    }
+
     public Concluinte getConcluinte(String matricula) {
         for (Aluno aluno : this.alunos) {
             if (aluno instanceof Concluinte && aluno.getMatricula().equals(matricula)) {
