@@ -30,6 +30,8 @@ public class Sistema {
         return null;
     }
 
+    public int getSizeAreas() { return this.areas.size(); }
+
     public void cadastrarCurso(Curso curso, Area area) { this.cursos.add(curso); }
 
     public void listarCursos() {
@@ -48,15 +50,7 @@ public class Sistema {
         return null;
     }
 
-    public ArrayList<Curso> getCursos() {
-        ArrayList<Curso> copia = new ArrayList<>();
-
-        for (Curso curso : this.cursos) {
-            copia.add(curso);
-        }
-
-        return copia;
-    }
+    public int getSizeCursos() { return this.cursos.size(); }
     
     public void cadastrarAluno(Aluno aluno, Curso curso) { this.alunos.add(aluno); }
     
@@ -66,17 +60,6 @@ public class Sistema {
                 if (!aluno.regular()) {
                     System.out.println(aluno.toString() + " - " + curso.toString());
                 }
-            }
-        }
-    }
-
-    public void listarAlunosNaoResponderam(boolean apenasConcluintes) {
-        for (Aluno aluno : this.alunos) {
-            if (
-                aluno.getQuestionarioRespondido()
-                && (!apenasConcluintes || aluno instanceof Concluinte)
-            ) {
-                System.out.println(aluno.toString());
             }
         }
     }
@@ -91,14 +74,31 @@ public class Sistema {
         return null;
     }
 
-    public ArrayList<Aluno> getAlunos() {
-        ArrayList<Aluno> copia = new ArrayList<>();
+    public int getSizeAlunos() { return this.alunos.size(); }
+
+    private ArrayList<Aluno> getAlunosNaoResponderam(boolean apenasConcluintes) {
+        ArrayList<Aluno> alunosNaoResponderam = new ArrayList<>();
 
         for (Aluno aluno : this.alunos) {
-            copia.add(aluno);
+            if (
+                aluno.getQuestionarioRespondido()
+                && (!apenasConcluintes || aluno instanceof Concluinte)
+            ) {
+                alunosNaoResponderam.add(aluno);
+            }
         }
 
-        return copia;
+        return alunosNaoResponderam;
+    }
+    
+    public void listarAlunosNaoResponderam(boolean apenasConcluintes) {
+        for (Aluno aluno : this.getAlunosNaoResponderam(apenasConcluintes)) {
+            System.out.println(aluno.toString());
+        }
+    }
+
+    public int getSizeAlunosNaoResponderam(boolean apenasConcluintes) {
+        return this.getAlunosNaoResponderam(apenasConcluintes).size();
     }
     
     public Concluinte getConcluinte(String matricula) {
